@@ -1,4 +1,4 @@
-# eBPF Verifier
+# eBPF Verifier Introduction
 
 The Berkeley Packet Filter (eBPF) enables user space programs to execute in the Linux kernel. 
 
@@ -48,6 +48,40 @@ It also simulates instruction execution and monitors state change of registers a
 The calls to unknown functions and unresolved function calls will be rejected.
 
 For example, eBPF confirms program ends with BPF_EXIT, and confirms all branch instructions, except for BPF_EXIT and BPF_CALL, are within program bounds. 
+
+The current eBPF verifier performs:
+- checking performance bug: 
+  - if a program execution ends (e.g. bounded loops)
+  - checking depth of execution path
+- checking memory safety: 
+  - if memory address addresses are within memorn boundary 
+  - invalid accessing uninitilized contents in registers
+- type checking, type checking of load/store instructions of registers with valid typed
+- ownership checking, eBPF programs may read data if the program wrote it
+
+
+Some Issues with eBPF programs:
+1. cannot perform dynamic allocation
+2. cannot access kernel data structures 
+3. cannot call in-kernel APIs
+4. run in single-threaded mode
+5. execution time is bounded
+6. do not have indirect jumps . Each jump instruction in eBPF program points to a fixed location in the code
+7. Heavily uses pointers and pointer arithemetic
+8. reliance on register spilling 
+9. manipulates a fixed number for exclusively owned memory regions
+
+Reference: 
+1. BPF: the universal in-kernel virtual machine https://lwn.net/Articles/599755/
+2. eBPF - extended Berkeley Packet Filter: https://prototype-kernel.readthedocs.io/en/latest/bpf/
+3. (PLDI'19) Simple and Precise Static Analysis of Untrusted Linux Kernel extensions  https://vbpf.github.io/assets/prevail-paper.pdf , https://github.com/vbpf/ebpf-verifier
+4. eBPF verifier code in Linux v5.14.14, https://github.com/torvalds/linux/blob/master/kernel/bpf/verifier.c
+5. Rust for Linux, https://github.com/Rust-for-Linux
+6. Bounded loops in BPF for the 5.3 kernel , https://lwn.net/Articles/794934/
+7. eBPF config in Linux v5.15.11, https://elixir.bootlin.com/linux/latest/source/include/uapi/linux/bpf_common.h
+8. Interactive Map for DataStructure, https://makelinux.github.io/kernel/map/
+
+
 
 
 
