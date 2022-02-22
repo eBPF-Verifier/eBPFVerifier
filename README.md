@@ -32,6 +32,8 @@ The current set of eBPF program types supported by the kernel is as following:
 ```
 
 
+## eBPF Passes
+
 Currently the eBPF verifier is focusing on verifying/validating "function entry and exit".
 
 
@@ -60,6 +62,8 @@ The current eBPF verifier performs:
 - ownership checking, eBPF programs may read data if the program wrote it
 
 
+## Issues with eBPF 
+
 Some Issues with eBPF programs:
 1. cannot perform dynamic allocation
 2. cannot access kernel data structures 
@@ -71,7 +75,10 @@ Some Issues with eBPF programs:
 8. reliance on register spilling 
 9. manipulates a fixed number for exclusively owned memory regions
 
-Reference: 
+
+
+## References
+
 1. BPF: the universal in-kernel virtual machine https://lwn.net/Articles/599755/
 2. eBPF - extended Berkeley Packet Filter: https://prototype-kernel.readthedocs.io/en/latest/bpf/
 3. (PLDI'19) Simple and Precise Static Analysis of Untrusted Linux Kernel extensions  https://vbpf.github.io/assets/prevail-paper.pdf , https://github.com/vbpf/ebpf-verifier
