@@ -1,5 +1,7 @@
 # eBPF Verifier Introduction
 
+This documentation is based on Linux 5.16.
+
 The Berkeley Packet Filter (eBPF) enables user space programs to execute in the Linux kernel. 
 
 Before eBPF, kernel code was mainly released as kernel patches and kernel modules. The eBPF enables program to be loaded from user space and run in kernel space. Some insecure programs might be introduced by these eBPF programs during this process. 
@@ -13,7 +15,7 @@ Hooks monitors:
 (3) network events and 
 (4) kprobes and uprobes. 
 
-The current set of eBPF program types supported by the kernel is as following:
+The current set of eBPF program types supported by the kernel is as following, Linux 5.16 source code:
 
 ```
 - BPF_PROG_TYPE_SOCKET_FILTER: a network packet filter
@@ -64,7 +66,7 @@ The current eBPF verifier performs:
 
 ## Issues with eBPF 
 
-Some Issues with eBPF programs:
+Some Issues with eBPF programs: 
 1. cannot perform dynamic allocation
 2. cannot access kernel data structures 
 3. cannot call in-kernel APIs
